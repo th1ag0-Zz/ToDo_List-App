@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.todolist"
+        applicationId "com.todolistbyth1ag0_zz"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

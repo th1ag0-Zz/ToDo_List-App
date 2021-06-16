@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Alert, FlatList } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import styles from './styles';
 import Button from '../../components/Button';
 import TaskCard from '../../components/TaskCard';
@@ -12,21 +14,39 @@ function Home() {
 
   const [isMyTasks, setIsMyTasks] = useState(false);
 
-  function handleAddNewSkill() {
+  async function handleAddNewSkill() {
     if (!newTask) {
       Alert.alert('Por favor, insira algum valor');
       return;
     }
 
-    setMyTasks([...myTasks, newTask]);
+    setMyTasks(oldvalue => [...oldvalue, newTask]);
+    console.log(myTasks);
     setNewTask('');
 
     setIsMyTasks(true);
+
+    try {
+      const storageTasks = await AsyncStorage.getItem('@todolist:tasks');
+
+      if (storageTasks) {
+        await AsyncStorage.setItem(
+          '@todolist:tasks',
+          `${myTasks.toString()},${newTask}`,
+        );
+      } else {
+        await AsyncStorage.setItem('@todolist:tasks', newTask);
+      }
+      console.log(myTasks);
+    } catch (error) {
+      Alert.alert('Não foi possivel adicionar esta tarefa');
+    }
   }
 
-  function eraseAll() {
+  async function eraseAll() {
     setMyTasks([]);
     setIsMyTasks(false);
+    await AsyncStorage.setItem('@todolist:tasks', '');
   }
 
   useEffect(() => {
@@ -39,6 +59,21 @@ function Home() {
     } else {
       setGreeting('Boa noite!');
     }
+  }, []);
+
+  useEffect(() => {
+    async function loadStorage() {
+      const storageTasks = await AsyncStorage.getItem('@todolist:tasks');
+
+      if (storageTasks) {
+        const tasksArray = storageTasks.split(',');
+        setMyTasks(tasksArray);
+        console.log(tasksArray);
+        setIsMyTasks(true);
+      }
+    }
+
+    loadStorage();
   }, []);
 
   return (
