@@ -3,7 +3,11 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-function TaskCard({ skill }) {
+interface SkillCardProps {
+  skill: string;
+}
+
+function TaskCard({ skill }: SkillCardProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleCheck() {
