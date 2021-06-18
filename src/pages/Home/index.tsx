@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text, View, TextInput, FlatList } from 'react-native';
 
 import styles from './styles';
 import Button from '../../components/Button';
 import TaskCard from '../../components/TaskCard';
 import { TasksContext } from '../../contexts/TasksContext';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
   const {
@@ -17,9 +19,25 @@ const Home = () => {
     myTasks,
   } = useContext(TasksContext);
 
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    async function loadUserName() {
+      const user = await AsyncStorage.getItem('@todolist:user');
+
+      if (user) {
+        setUserName(`${user}!`);
+      }
+    }
+
+    loadUserName();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{greeting} 😃</Text>
+      <Text style={styles.title}>
+        {greeting}, {userName} 😃
+      </Text>
 
       <TextInput
         value={newTask}

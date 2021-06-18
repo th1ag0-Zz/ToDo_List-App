@@ -40,7 +40,6 @@ function TaskCard({ task }: SkillCardProps) {
 
   useEffect(() => {
     saveToLocalStorage();
-    console.log(myTasks);
   }, [isChecked]);
 
   return (

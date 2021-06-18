@@ -37,7 +37,6 @@ export default function TasksProvider({ children }: TasksProviderProps) {
   async function saveToLocalStorage() {
     try {
       await AsyncStorage.setItem('@todolist:tasks', JSON.stringify(myTasks));
-      console.log('salvo!');
     } catch (error) {
       Alert.alert('Não foi possivel adicionar esta tarefa');
     }
@@ -65,7 +64,6 @@ export default function TasksProvider({ children }: TasksProviderProps) {
         '@todolist:tasks',
         JSON.stringify([...myTasks, data]),
       );
-      console.log(myTasks);
     } catch (error) {
       Alert.alert('Não foi possivel adicionar esta tarefa');
     }
@@ -81,11 +79,11 @@ export default function TasksProvider({ children }: TasksProviderProps) {
     const currentHour = new Date().getHours();
 
     if (currentHour < 12) {
-      setGreeting('Bom dia!');
+      setGreeting('Bom dia');
     } else if (currentHour >= 12 && currentHour < 18) {
-      setGreeting('Boa tarde!');
+      setGreeting('Boa tarde');
     } else {
-      setGreeting('Boa noite!');
+      setGreeting('Boa noite');
     }
 
     async function loadStorage() {
@@ -93,8 +91,6 @@ export default function TasksProvider({ children }: TasksProviderProps) {
 
       if (storageTasks) {
         const tasksArray = JSON.parse(storageTasks);
-        console.log(tasksArray);
-
         setMyTasks(tasksArray);
         setIsMyTasks(true);
       }
