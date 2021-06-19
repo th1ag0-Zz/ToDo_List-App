@@ -10,7 +10,7 @@ import TasksProvider from './src/contexts/TasksContext';
 import 'react-native-gesture-handler';
 
 const App = () => {
-  const [isNewUser, setIsNewUser] = useState(false);
+  const [isNewUser, setIsNewUser] = useState<boolean>();
 
   useEffect(() => {
     async function verifyStorage() {
@@ -29,7 +29,7 @@ const App = () => {
   return (
     <>
       <StatusBar backgroundColor="#121014" barStyle="light-content" />
-      <TasksProvider>{!isNewUser ? <Home /> : <Routes />}</TasksProvider>
+      <TasksProvider>{isNewUser ? <Routes /> : <Home />}</TasksProvider>
     </>
   );
 };
