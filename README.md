@@ -7,7 +7,7 @@ Aplicativo para anotar tarefas feito com React Native
 <img width="220" src="./.github/print2.jpeg" />
 </p>
 
-Você pode baixar o app por este [link](#/).
+Você pode baixar o app por este [link](https://play.google.com/store/apps/details?id=com.todolistbyth1ag0_zz).
 
 ### :rocket: Melhorias para fazer:
 - [x] Adicionar AsyncStorage
@@ -37,4 +37,4 @@ Pronto! Agora você pode fazer suas modificações. 😃
 Este projeto está sob a licensa MIT. Clique [aqui](https://github.com/th1ag0-Zz/ToDo_List-App/blob/main/LICENSE.md) para saber mais.
 
 ---
-Feito por [Thiago Silva](https://www.linkedin.com/in/thiago-furtado-silva/) 🕶️
+Feito por [Thiago Silva](https://www.linkedin.com/in/thiago-furtado-silva/) 😁
